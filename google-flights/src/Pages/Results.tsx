@@ -6,18 +6,21 @@ import useFetchFlights from "@/hooks";
 const ResultsPage: React.FC = () => {
   const location = useLocation();
 
-  // Parse query parameters from URL
+  // Extract query parameters
   const params = new URLSearchParams(location.search);
   const from = params.get("from") || "";
   const to = params.get("to") || "";
   const date = params.get("date") || "";
 
-  // Use custom hook to fetch flights
+  // Fetch flights using the custom hook
   const { flights, loading, error, refetch } = useFetchFlights({
     from,
     to,
     date,
   });
+
+  // Safely access itineraries
+  const itineraries = flights?.data?.itineraries || [];
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
@@ -25,7 +28,6 @@ const ResultsPage: React.FC = () => {
         Flight Results
       </h1>
 
-      {/* Show search details */}
       <div className="text-center mb-4">
         <p>
           Searching for flights from <span className="font-bold">{from}</span>{" "}
@@ -40,20 +42,22 @@ const ResultsPage: React.FC = () => {
         </button>
       </div>
 
-      {/* Show loading state */}
+      {/* Loading State */}
       {loading && <p className="text-center">Loading flights...</p>}
 
-      {/* Show error state */}
+      {/* Error State */}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      {/* Show results */}
+      {/* Results */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {flights && flights.data.itineraries.length > 0
-          ? flights.data.itineraries.map((flight, index) => (
+        {itineraries.length > 0
+          ? itineraries.map((flight, index) => (
               <FlightCard key={index} flight={flight} />
             ))
           : !loading &&
-            !error && <p className="text-center">No flights found.</p>}
+            !error && (
+              <p className="text-center col-span-full">No flights found.</p>
+            )}
       </div>
     </div>
   );

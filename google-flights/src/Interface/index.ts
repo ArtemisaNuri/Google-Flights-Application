@@ -46,6 +46,7 @@ export interface FlightSearchParams {
 
 // Root Response from API
 export interface FlightApiResponse {
+  flights: any;
   status: boolean; // Indicates if the API call was successful
   timestamp: number; // Time of the response
   sessionId: string; // Unique session ID
@@ -59,24 +60,24 @@ export interface FlightData {
   filterStats: FilterStats; // Stats for filtering options
   flightsSessionId: string; // Session ID for fetching flights
   destinationImageUrl: string; // URL for the destination image
+  everywhereDestination:string; // URL for
 }
 
-// Context Metadata
+
 export interface Context {
-  status: string; // Status of the search ("complete", "incomplete", etc.)
-  sessionId: string; // Session ID for tracking
-  totalResults: number; // Total number of results returned
+  status: string; 
+  sessionId: string;
+  totalResults: number; 
 }
 
-// Individual Flight Itinerary
 export interface Itinerary {
-  price: number; // Price of the flight
-  duration: string; // Duration of the flight
-  stops: number; // Number of stops
-  carrier: string; // Airline carrier
-  departureTime: string; // Departure time
-  arrivalTime: string; // Arrival time
-  origin: string; // Origin airport
+  price: number; 
+  duration: string; 
+  stops: number; 
+  carrier: string;
+  departureTime: string; 
+  arrivalTime: string; 
+  origin: string; 
   destination: string; // Destination airport
   cabinClass: string; // Cabin class (Economy, Business, etc.)
   flightNumber: string; // Flight number

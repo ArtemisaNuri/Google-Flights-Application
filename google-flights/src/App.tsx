@@ -4,12 +4,14 @@ import Home from "./Pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ResultsPage from "./Pages/Results";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <Router>
         <Header />
+        <Toaster />
 
         <Routes>
           <Route path="/" element={<Home />} />
