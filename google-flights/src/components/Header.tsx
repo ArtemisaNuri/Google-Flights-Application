@@ -1,53 +1,52 @@
-import { Car, Globe2, Hotel, Luggage, Plane, PlaneTakeoff } from "lucide-react";
-import React from "react";
+import { Globe2, Info, Plane, PlaneTakeoff } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
-    <header className="w-full p-4 fixed bg-slate-900 text-white shadow-md">
+    <header className="w-full p-4 fixed top-0 bg-slate-900 text-white shadow-md z-50">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo */}
-        <div className="flex items-center gap-2 text-emerald-500 font-bold text-lg">
+        <NavLink
+          to="/"
+          className="flex items-center gap-2 text-emerald-500 font-bold text-lg hover:text-emerald-400 transition-colors"
+        >
           <Plane aria-label="Smart Flights Logo" />
           <span>Smart Flights</span>
-        </div>
+        </NavLink>
 
-        {/* Navigation */}
         <nav className="flex items-center gap-6 text-sm font-medium">
-          <a
-            href="#travel"
-            className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
-          >
-            <Luggage aria-label="Travel Icon" />
-            Travel
-          </a>
-          <a
-            href="#flights"
-            className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              `flex items-center gap-2 transition-colors ${
+                isActive ? "text-emerald-400" : "hover:text-emerald-400"
+              }`
+            }
           >
             <PlaneTakeoff aria-label="Flights Icon" />
             Flights
-          </a>
-          <a
-            href="#explore"
-            className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+          </NavLink>
+          <NavLink
+            to="/explore"
+            className={({ isActive }) =>
+              `flex items-center gap-2 transition-colors ${
+                isActive ? "text-emerald-400" : "hover:text-emerald-400"
+              }`
+            }
           >
             <Globe2 aria-label="Explore Icon" />
             Explore
-          </a>
-          <a
-            href="#hotels"
-            className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `flex items-center gap-2 transition-colors ${
+                isActive ? "text-emerald-400" : "hover:text-emerald-400"
+              }`
+            }
           >
-            <Hotel size={20} aria-label="Hotels Icon" />
-            Hotels
-          </a>
-          <a
-            href="#vacation-rentals"
-            className="flex items-center gap-2 hover:text-emerald-400 transition-colors"
-          >
-            <Car aria-label="Vacation Rentals Icon" />
-            Vacation Rentals
-          </a>
+            <Info />
+            About
+          </NavLink>
         </nav>
       </div>
     </header>

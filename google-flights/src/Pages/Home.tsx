@@ -1,98 +1,31 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { toast } from "@/hooks/use-toast";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { HeroCarousel } from "@/components/HeroCarousel";
+import { Card } from "@/components/ui/card";
 
-const Home: React.FC = () => {
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
-  const [date, setDate] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!from || !to || !date) {
-      toast({
-        title: "Missing Fields",
-        description: "Please fill out all fields to search for flights.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    navigate(`/results?from=${from}&to=${to}&date=${date}`);
-  };
-
+const HomePage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-start p-4 bg-slate-700">
-      <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center  text-blue-600">
-          Search Flights
+    <div className="flex flex-col overflow-hidden">
+      <div className="w-full h-screen">
+        <HeroCarousel />
+      </div>
+
+      <div className="w-full max-w-6xl mx-auto px-6 text-center mt-12">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+          Welcome to Our Application
         </h1>
-        <form onSubmit={handleSearch} className="space-y-4">
-          <div>
-            <Label
-              htmlFor="from"
-              className="block text-sm font-medium text-gray-700"
-            >
-              From (Origin)
-            </Label>
-            <Input
-              type="text"
-              id="from"
-              value={from}
-              onChange={(e) => setFrom(e.target.value)}
-              placeholder="Enter origin airport code (e.g., JFK)"
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
+        <p className="text-lg text-gray-700 dark:text-gray-300">
+          Discover a world of seamless experiences with our innovative platform.
+          Explore, engage, and enjoy the journey!
+        </p>
+      </div>
 
-          <div>
-            <Label
-              htmlFor="to"
-              className="block text-sm font-medium text-gray-700"
-            >
-              To (Destination)
-            </Label>
-            <Input
-              type="text"
-              id="to"
-              value={to}
-              onChange={(e) => setTo(e.target.value)}
-              placeholder="Enter destination airport code (e.g., LAX)"
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-
-          <div>
-            <Label
-              htmlFor="date"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Date
-            </Label>
-            <Input
-              type="date"
-              id="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            Search Flights
-          </Button>
-        </form>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 px-6 max-w-6xl mx-auto">
+        <Card className="h-64 w-64 pb-4 p-6">Card 1 Content</Card>
+        <Card className="h-64 w-64 p-6">Card 2 Content</Card>
+        <Card className="h-64 w-64 p-6">Card 3 Content</Card>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
