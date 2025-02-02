@@ -35,7 +35,7 @@ export default function ResultsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900">
         <div className="text-center space-y-4 animate-fade-in">
-          <PlaneTakeoff className="w-14 h-14 text-emerald-500 animate-bounce mx-auto" />
+          <PlaneTakeoff className="w-14 h-14 text-indigo-400 animate-bounce mx-auto" />
           <p className="text-lg text-gray-300 font-medium">
             Searching for the best flights...
           </p>

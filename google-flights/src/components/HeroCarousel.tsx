@@ -10,26 +10,22 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 
 const IMAGES = [
+  "src/assets/Images/maldi.jpg",
   "src/assets/Images/island-7058873_1280.jpg",
   "src/assets/Images/rome.webp",
   "src/assets/Images/fishes.png",
-  "src/assets/Images/maldi.jpg",
-  "src/assets/Images/mount.jpg",
-  "src/assets/Images/fantasy-3502188_1280.jpg",
-
-  // "src/assets/Images/dubai.jpg",
+  "src/assets/Images/mountain.webp",
+  "src/assets/Images/shangahai.webp",
 ];
 
-const CAPTIONS = [
-  "Discover magical destinations",
-  "Paradise awaits on distant shores",
-  "Experience the wonders of the sea",
-  "Discover ancient ruins of Maldives",
-  "Savor the beauty of the mountains",
-  "Take flight to your next adventure",
-
-  // "Experience the breathtaking views of Dubai",
-];
+// const CAPTIONS = [
+//   "Discover magical destinations",
+//   "Paradise awaits on distant shores",
+//   "Experience the wonders of the sea",
+//   "Discover ancient ruins of Maldives",
+//   "Savor the beauty of the mountains",
+//   "Take flight to your next adventure",
+// ];
 
 export const HeroCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -37,9 +33,9 @@ export const HeroCarousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % IMAGES.length);
-    }, 5000); 
+    }, 10000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -52,7 +48,7 @@ export const HeroCarousel = () => {
           }}
         >
           {IMAGES.map((src, index) => (
-            <CarouselItem key={index} className="w-full h-screen flex-shrink-0">
+            <CarouselItem key={index} className="w-full h-[85vh] flex-shrink-0">
               <Card className="border-0 h-full">
                 <CardContent className="relative p-0 h-full">
                   <div className="relative w-full h-full">
@@ -61,16 +57,15 @@ export const HeroCarousel = () => {
                       alt={`Travel destination ${index + 1}`}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
-
-                    <div className="absolute bottom-16 left-8 md:left-16 text-white max-w-xl">
+                    <div className="absolute inset-0  bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
+                    <div className="absolute bottom-32 left-8 md:left-16 text-white max-w-xl">
                       <h2 className="text-4xl md:text-6xl font-bold mb-4">
-                        {CAPTIONS[index]}
+                        {/* {CAPTIONS[index]} */}
                       </h2>
-                      <p className="text-lg md:text-xl text-gray-200">
-                        {`Destination ${index + 1} of ${IMAGES.length}`}
-                      </p>
+                      {/* <p className="text-lg md:text-xl text-gray-200">
+                        Explore our curated selection of extraordinary
+                        destinations
+                      </p> */}
                     </div>
                   </div>
                 </CardContent>
@@ -79,7 +74,7 @@ export const HeroCarousel = () => {
           ))}
         </CarouselContent>
 
-        <div className="absolute left-4 top-1/2 -translate-y-1/2">
+        <div className="absolute  left-4 top-1/2 -translate-y-1/2">
           <CarouselPrevious
             className="bg-white/30 hover:bg-white/50 text-black p-3 rounded-full"
             onClick={() =>
@@ -96,6 +91,22 @@ export const HeroCarousel = () => {
               setActiveIndex((prevIndex) => (prevIndex + 1) % IMAGES.length)
             }
           />
+        </div>
+
+        <div className="absolute bottom-16 left-0 right-0">
+          <div className="flex justify-center gap-2">
+            {IMAGES.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? "bg-white w-8"
+                    : "bg-white/50 hover:bg-white/80"
+                }`}
+                onClick={() => setActiveIndex(index)}
+              />
+            ))}
+          </div>
         </div>
       </Carousel>
     </div>

@@ -4,12 +4,14 @@ import Header from "./components/Header";
 import { Toaster } from "./components/ui/toaster";
 import { SearchForm } from "./Pages/SearchForm";
 import Results from "./Pages/Results";
-import { Home } from "lucide-react";
 import HomePage from "./Pages/Home";
+import TripsPage from "./Pages/ExplorePage";
+import AboutPage from "./Pages/About";
+
 
 const App = () => {
   return (
-    <div className="min-h-screen flex  bg-slate-800 flex-col ">
+    <div className="min-h-screen flex  bg-slate-900 flex-col ">
       <Router>
         <Header />
 
@@ -18,7 +20,9 @@ const App = () => {
           <Routes>
             <Route path="/search" element={<SearchForm />} />
             <Route path="/results" element={<Results />} />
+            <Route path="/explore-more" element={<TripsPage />} />
             <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
 

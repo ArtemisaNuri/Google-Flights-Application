@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,10 +8,10 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { PlaneTakeoff, Calendar, Users, ArrowRight } from "lucide-react";
 
 interface Airport {
-  id: string; 
-  code: string; 
-  name: string; 
-  countryName: string; 
+  id: string;
+  code: string;
+  name: string;
+  countryName: string;
 }
 
 export const SearchForm = () => {
@@ -31,9 +30,7 @@ export const SearchForm = () => {
 
   const [originSearch, setOriginSearch] = useState("");
   const [destinationSearch, setDestinationSearch] = useState("");
-
   const [airports, setAirports] = useState<Airport[]>([]);
-
 
   const searchAirports = async (query: string) => {
     if (query.length < 2) {
@@ -56,7 +53,7 @@ export const SearchForm = () => {
 
     try {
       const response = await axios.request(options);
-      const data = response.data?.data || []; 
+      const data = response.data?.data || [];
 
       const filtered = data
         .filter((item: any) => item.navigation.entityType === "AIRPORT")
@@ -74,7 +71,6 @@ export const SearchForm = () => {
     }
   };
 
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const queryString = new URLSearchParams(formData).toString();
@@ -82,19 +78,19 @@ export const SearchForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 px-4 py-8">
-      <Card className="max-w-3xl w-full mx-auto backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl">
-        <CardHeader className="border-b border-white/10 py-4">
-          <CardTitle className="text-xl md:text-2xl text-center flex items-center text-white justify-center gap-3">
-            <PlaneTakeoff className="w-6 h-6 text-emerald-400" />
+    <div className="min-h-screen flex items-center bg-slate-900 px-4 py-8">
+      <Card className="max-w-4xl w-full mx-auto bg-slate-800/50 border-slate-700 shadow-2xl">
+        <CardHeader className="border-b border-slate-700 py-6">
+          <CardTitle className="text-2xl md:text-3xl text-center flex items-center text-white justify-center gap-3">
+            <PlaneTakeoff className="w-8 h-8 text-slate-300" />
             Find Your Perfect Flight
           </CardTitle>
         </CardHeader>
-        <CardContent className="mt-4 px-4 md:px-6 pb-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex flex-col md:flex-row gap-4">
+        <CardContent className="mt-6 px-6 md:px-8 pb-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 space-y-2">
-                <Label className="text-white">From</Label>
+                <Label className="text-slate-300 text-sm">From</Label>
                 <Input
                   type="text"
                   placeholder="Type an airport..."
@@ -103,39 +99,40 @@ export const SearchForm = () => {
                     setOriginSearch(e.target.value);
                     searchAirports(e.target.value);
                   }}
-                  className="bg-white/20 border-white/20 text-white focus-visible:ring-emerald-400 h-10"
+                  className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-500 focus-visible:ring-slate-400 h-12"
                 />
-
-                {/* Suggestions list for "From" */}
                 {airports.length > 0 && originSearch.length >= 2 && (
-                  <ul className="mt-2 bg-white/90 text-black rounded shadow-md max-h-64 overflow-auto">
+                  <ul className="mt-2 bg-slate-800 text-slate-100 rounded-md shadow-xl max-h-64 overflow-auto border border-slate-700">
                     {airports.map((airport) => (
                       <li
                         key={airport.id}
-                        className="px-2 py-1 cursor-pointer hover:bg-gray-200"
+                        className="px-4 py-2 cursor-pointer hover:bg-slate-700 transition-colors"
                         onClick={() => {
                           setFormData({
                             ...formData,
                             originSkyId: airport.code,
                             originEntityId: airport.id,
                           });
-                          // Show the user a nice label
                           setOriginSearch(`${airport.name} (${airport.code})`);
-                          // Optionally clear suggestions after selecting
                           setAirports([]);
                         }}
                       >
-                        {airport.name} ({airport.code}){" "}
-                        {airport.countryName && `- ${airport.countryName}`}
+                        <div className="font-medium">
+                          {airport.name} ({airport.code})
+                        </div>
+                        {airport.countryName && (
+                          <div className="text-sm text-slate-400">
+                            {airport.countryName}
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
                 )}
               </div>
 
-              {/* DESTINATION - "To" */}
               <div className="flex-1 space-y-2">
-                <Label className="text-white">To</Label>
+                <Label className="text-slate-300 text-sm">To</Label>
                 <Input
                   type="text"
                   placeholder="Type an airport..."
@@ -144,16 +141,14 @@ export const SearchForm = () => {
                     setDestinationSearch(e.target.value);
                     searchAirports(e.target.value);
                   }}
-                  className="bg-white/20 border-white/20 text-white focus-visible:ring-emerald-400 h-10"
+                  className="bg-slate-900/50 border-slate-600 text-white placeholder:text-slate-500 focus-visible:ring-slate-400 h-12"
                 />
-
-                {/* Suggestions list for "To" */}
                 {airports.length > 0 && destinationSearch.length >= 2 && (
-                  <ul className="mt-2 bg-white/90 text-black rounded shadow-md max-h-64 overflow-auto">
+                  <ul className="mt-2 bg-slate-800 text-slate-100 rounded-md shadow-xl max-h-64 overflow-auto border border-slate-700">
                     {airports.map((airport) => (
                       <li
                         key={airport.id}
-                        className="px-2 py-1 cursor-pointer hover:bg-gray-200"
+                        className="px-4 py-2 cursor-pointer hover:bg-slate-700 transition-colors"
                         onClick={() => {
                           setFormData({
                             ...formData,
@@ -166,8 +161,14 @@ export const SearchForm = () => {
                           setAirports([]);
                         }}
                       >
-                        {airport.name} ({airport.code}){" "}
-                        {airport.countryName && `- ${airport.countryName}`}
+                        <div className="font-medium">
+                          {airport.name} ({airport.code})
+                        </div>
+                        {airport.countryName && (
+                          <div className="text-sm text-slate-400">
+                            {airport.countryName}
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -175,11 +176,11 @@ export const SearchForm = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 space-y-2">
                 <Label
                   htmlFor="date"
-                  className="flex items-center gap-2 text-white"
+                  className="flex items-center gap-2 text-slate-300 text-sm"
                 >
                   <Calendar className="w-4 h-4" />
                   Departure
@@ -191,13 +192,13 @@ export const SearchForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, date: e.target.value })
                   }
-                  className="bg-white/20 border-white/20 text-white focus-visible:ring-emerald-400 h-10"
+                  className="bg-slate-900/50 border-slate-600 text-white focus-visible:ring-slate-400 h-12"
                 />
               </div>
               <div className="flex-1 space-y-2">
                 <Label
                   htmlFor="returnDate"
-                  className="flex items-center gap-2 text-white"
+                  className="flex items-center gap-2 text-slate-300 text-sm"
                 >
                   <Calendar className="w-4 h-4" />
                   Return
@@ -209,16 +210,16 @@ export const SearchForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, returnDate: e.target.value })
                   }
-                  className="bg-white/20 border-white/20 text-white focus-visible:ring-emerald-400 h-10"
+                  className="bg-slate-900/50 border-slate-600 text-white focus-visible:ring-slate-400 h-12"
                 />
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 space-y-2">
                 <Label
                   htmlFor="adults"
-                  className="flex items-center gap-2 text-white"
+                  className="flex items-center gap-2 text-slate-300 text-sm"
                 >
                   <Users className="w-4 h-4" />
                   Passengers
@@ -232,11 +233,11 @@ export const SearchForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, adults: e.target.value })
                   }
-                  className="bg-white/20 border-white/20 text-white focus-visible:ring-emerald-400 h-10"
+                  className="bg-slate-900/50 border-slate-600 text-white focus-visible:ring-slate-400 h-12"
                 />
               </div>
               <div className="flex-1 space-y-2">
-                <Label htmlFor="cabinClass" className="text-white">
+                <Label htmlFor="cabinClass" className="text-slate-300 text-sm">
                   Class
                 </Label>
                 <select
@@ -245,7 +246,7 @@ export const SearchForm = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, cabinClass: e.target.value })
                   }
-                  className="w-full h-10 bg-white/20 border border-white/20 text-white px-2 rounded"
+                  className="w-full h-12 bg-slate-900/50 border border-slate-600 text-white rounded-md focus:ring-2 focus:ring-slate-400 px-3"
                 >
                   <option value="economy">Economy</option>
                   <option value="premiumEconomy">Premium Economy</option>
@@ -257,10 +258,10 @@ export const SearchForm = () => {
 
             <Button
               type="submit"
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-base h-10 mt-4 shadow-lg"
+              className="bg-slate-700 hover:bg-slate-600 text-white px-8 py-6 text-lg w-full"
             >
               Search Flights
-              <ArrowRight className="ml-2 w-4 h-4" />
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </form>
         </CardContent>
