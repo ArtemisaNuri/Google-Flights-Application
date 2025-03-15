@@ -1,6 +1,7 @@
 {
   "builds": [
     {
+        "framework":"vite",
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -11,4 +12,6 @@
   "routes": [
     { "src": "/(.*)", "dest": "/index.html" }
   ]
+  
+  
 }
