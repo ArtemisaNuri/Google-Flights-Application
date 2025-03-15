@@ -18,10 +18,11 @@ const App = () => {
         <main className="flex-1 w-full">
           <Toaster />
           <Routes>
+            <Route path="/" element={<HomePage />} />
+
             <Route path="/search" element={<SearchForm />} />
             <Route path="/results" element={<Results />} />
             <Route path="/explore-more" element={<TripsPage />} />
-            <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
