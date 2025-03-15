@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Accordion,
@@ -20,11 +19,8 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export default function AboutPage() {
-  const [faqOpen, setFaqOpen] = useState(null);
-  const navigate=useNavigate()
   return (
     <div className="bg-slate-900 min-h-screen text-white">
       <div
@@ -167,9 +163,7 @@ const features = [
     icon: Heart,
   },
 ];
-const images =[
-    'src/assets/images/plane.jpg'
-]
+
 
 
 const stats = [
