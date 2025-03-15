@@ -5,15 +5,20 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
- 
 export default defineConfig({
   plugins: [react()],
-    define: {
+  define: {
     'process.env': process.env
   },
+  base: '/',
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), 
+      "@": path.resolve(__dirname, "src"),
     },
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false
+  }
 });
